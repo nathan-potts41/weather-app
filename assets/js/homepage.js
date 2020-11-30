@@ -1,18 +1,21 @@
+//function fetching the data from the api
 var getCityData = function () {
-    var cityEntry = document.querySelector("#city-search").value;
-    var searchStr = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityEntry + "&appid=96113c7d8fc2e884ca4452fa7e3dbdd7"
-
-    fetch(searchStr).then(function (response) {
-        return response.json();
-    })
+    event.preventDefault();
+    var cityEntry = document.getElementById("city-search").value;
+    var searchStr = fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + cityEntry + "&appid=a41a732753ea4b9aa10d848013b989de")
         .then(function (response) {
-            console.log(response.data);
-            
-            var responseContainerEl = document.querySelector(".day")
-
-            responseContainerEl.innerHTML = "";
-            
-        })
+            response.json().then(function (data) {
+                console.log(data)
+            });
+        });
 };
 
-getCityData();
+
+// var displayData = function () {
+
+// }
+
+// document.addEventListener("load", )
+document.getElementById("submit").addEventListener("click", getCityData);
+
+

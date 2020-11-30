@@ -16,26 +16,28 @@
     </header>
     <div class="container-fluid">
         <div class="row">
+            <!-- list of popular cities for search -->
             <div class="col-4 city-search">
-                    <h5>Search for a City:</h5>
-                    <form class="search-bar" action="action_page.php">
-                        <input type="text" placeholder="" name="search" id="city-search">
-                        <button type="submit"><i class="fa fa-search"></i></button>
-                    </form>
-                    </br>
-                    <div class="card justify-content-start">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
-                            <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
-                            <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                        </ul>
-                    </div>
+                <h5>Search for a City:</h5>
+                <form class="search-bar" action="action_page.php">
+                    <input type="text" placeholder="" name="search" id="city-search">
+                    <button type="submit" id="submit"><i class="fa fa-search"></i></button>
+                </form>
+                </br>
+                <div class="card justify-content-start">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"></li>
+                        <li class="list-group-item"></li>
+                        <li class="list-group-item"></li>
+                        <li class="list-group-item"></li>
+                        <li class="list-group-item"></li>
+                        <li class="list-group-item"></li>
+                        <li class="list-group-item"></li>
+                        <li class="list-group-item"></li>
+                    </ul>
+                </div>
             </div>
+            <!-- City that has been searched will appear in this card -->
             <div class="col-8">
                 <div class="row-8">
                     <div class="card border-dark mb-3" style="max-width: 100%">
@@ -47,6 +49,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- the  5 day forcast will be listed in these 5 cards -->
                 <div class="row-8">
                     <h4>5-day Forecast:</h4>
                     <div class="card-deck">
@@ -89,6 +92,7 @@
 
 
     </div>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/open-weather/2.0.0/openweather.min.js"></script> -->
     <script src="./assets/js/homepage.js"></script>
 </body>
 
