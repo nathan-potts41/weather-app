@@ -15,36 +15,44 @@ var getCity = function (event) {
 
 // function fetching the json data for above city
 var getCityData = function (city) {
-    var searchStr = fetch(weatherUrl + city + apiKey)
+
+    fetch(weatherUrl + city + apiKey)
         .then(function (response) {
             response.json()
                 .then(function (data) {
-                    console.log(data.list)
+                    console.log(data.list);
+                    var weatherContainer = document.getElementById("currentForecast");
+                    var cityTitle = document.getElementById("cityName");
+
+                    var title = document.createElement("h2")
+                    title.innerHTML = $("#city-search").val() + " " + moment().format("(MM / D / YYYY)");
+
+                    var temp = document.createElement("p")
+                    temp.innerHTML = 'Temperature: ' + data.list[0].main.temp;
+
+                    var humidity = document.createElement("p")
+                    humidity.innerHTML = 'Humidity: ' + data.list[0].main.humidity;
+
+                    var windSpeed = document.createElement("p")
+                    windSpeed.innerHTML = 'Wind Speed: ' + data.list[0].wind.speed;
+
+                    var feelsLike = document.createElement("p")
+                    feelsLike.innerHTML = 'Feels Like: ' + data.list[0].main.feels_like;
+
+                    cityTitle.appendChild(title);
+                    weatherContainer.appendChild(temp);
+                    weatherContainer.appendChild(humidity);
+                    weatherContainer.appendChild(windSpeed);
+                    weatherContainer.appendChild(feelsLike);
                 });
         });
-    displayForecast(searchStr);
-}
+
+};
 
 // function for current day forecast
-var displayForecast = function (searchStr) {
-    var weatherContainer = document.getElementById("currentForecast")
+var displayForecast = function () {
 
-    var temp = document.createElement("p")
-    temp.innerHTML = 'Temperature: ' + searchStr.list;
 
-    var humidity = document.createElement("p")
-    humidity.innerHTML = 'Humidity:' + searchStr.humidity;
-
-    var windSpeed = document.createElement("p")
-    windSpeed.innerHTML = 'Wind Speed:' + searchStr.wind;
-
-    var feelsLike = document.createElement("p")
-    feelsLike.innerHTML = 'Feels Like:' + searchStr.feels_like;
-
-    weatherContainer.appendChild(temp);
-    weatherContainer.appendChild(humidity);
-    weatherContainer.appendChild(windSpeed);
-    weatherContainer.appendChild(feelsLike);
 
     // for (var i = 0; i < searchStr.length; i++) {
     //     var div = document.createElement("p")
