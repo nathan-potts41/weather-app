@@ -1,6 +1,8 @@
+// inputted city weather api
 var weatherUrl = "https://api.openweathermap.org/data/2.5/forecast?q=";
 var apiKey = "&units=imperial&appid=a41a732753ea4b9aa10d848013b989de";
-var forecastDayContainerEl = $("#forecastDay");
+
+// inputted city uv index api
 var uvUrl = "http://api.openweathermap.org/data/2.5/uvi?lat=";
 var lonData = "&lon=";
 var uvKey = "&appid=a41a732753ea4b9aa10d848013b989de";
@@ -28,22 +30,26 @@ var getCityData = function (city) {
                         var weatherContainer = document.getElementById("currentForecast");
                         var cityTitle = document.getElementById("cityName");
 
-                        var title = document.createElement("h2")
+                        var title = document.createElement("h3")
                         title.innerHTML = $("#city-search").val() + " " + moment().format("(MM / D / YYYY)");
 
+                        var icon = document.createElement("img")
+                        icon.src = "http://openweathermap.org/img/wn/" + data.list[0].weather[0].icon + ".png";
+
                         var temp = document.createElement("p")
-                        temp.innerHTML = 'Temperature: ' + data.list[0].main.temp;
+                        temp.innerHTML = 'Temperature: ' + data.list[0].main.temp + " ˚F";
 
                         var humidity = document.createElement("p")
-                        humidity.innerHTML = 'Humidity: ' + data.list[0].main.humidity;
+                        humidity.innerHTML = 'Humidity: ' + data.list[0].main.humidity + " %";
 
                         var windSpeed = document.createElement("p")
-                        windSpeed.innerHTML = 'Wind Speed: ' + data.list[0].wind.speed;
+                        windSpeed.innerHTML = 'Wind Speed: ' + data.list[0].wind.speed + " mph";
 
                         var feelsLike = document.createElement("p")
-                        feelsLike.innerHTML = 'Feels Like: ' + data.list[0].main.feels_like;
+                        feelsLike.innerHTML = 'Feels Like: ' + data.list[0].main.feels_like + " ˚F";
 
-                        cityTitle.appendChild(title);
+                        cityTitle.append(title);
+                        title.append(icon);
                         weatherContainer.appendChild(temp);
                         weatherContainer.appendChild(humidity);
                         weatherContainer.appendChild(windSpeed);
@@ -67,8 +73,6 @@ var getCityData = function (city) {
                                 };
                             });
                     });
-
-
             } else {
                 alert('Your search did not work, please make sure you entered the city correctly.');
             }
