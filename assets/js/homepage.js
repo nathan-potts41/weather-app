@@ -1,7 +1,9 @@
 var weatherUrl = "https://api.openweathermap.org/data/2.5/forecast?q=";
 var apiKey = "&units=imperial&appid=a41a732753ea4b9aa10d848013b989de";
 var forecastDayContainerEl = $("#forecastDay");
-
+var uvUrl = "http://api.openweathermap.org/data/2.5/uvi?lat=";
+var lonData = "&lon=";
+var uvKey = "&appid=a41a732753ea4b9aa10d848013b989de";
 
 
 // function fetching the city from the api
@@ -21,6 +23,8 @@ var getCityData = function (city) {
                 response.json()
                     .then(function (data) {
                         console.log(data);
+
+                        // dynamically generated htmlloaded into page
                         var weatherContainer = document.getElementById("currentForecast");
                         var cityTitle = document.getElementById("cityName");
 
@@ -44,40 +48,45 @@ var getCityData = function (city) {
                         weatherContainer.appendChild(humidity);
                         weatherContainer.appendChild(windSpeed);
                         weatherContainer.appendChild(feelsLike);
+
+                        var lat = data.city.coord.lat;
+                        var lon = data.city.coord.lon;
+
+                        fetch(uvUrl + lat + lonData + lon + uvKey)
+                            .then(function (uvresponse) {
+                                if (uvresponse.ok) {
+                                    uvresponse.json()
+                                        .then(function (uvdata) {
+                                            console.log(uvdata);
+
+                                            var uvIndex = document.createElement("p")
+                                            uvIndex.innerHTML = 'UV Index: ' + uvdata.value;
+
+                                            weatherContainer.appendChild(uvIndex);
+                                        });
+                                };
+                            });
                     });
+
+
             } else {
                 alert('Your search did not work, please make sure you entered the city correctly.');
             }
 
         });
+
 };
 
-// function for current day forecast
+// function for weekly forecast
 var displayForecast = function () {
 
 
-
-    // for (var i = 0; i < searchStr.length; i++) {
-    //     var div = document.createElement("p")
-    //     div.innerHTML = 'Temperature:' + searchStr[i].temp;
-    //     div.innerHTML = 'Humidity:' + searchStr[i].humidity;
-    //     div.innerHTML = 'Wind Speed:' + searchStr[i].wind;
-    //     div.innerHTML = 'Feels Like:' + searchStr[i].feels_like;
-
-    //     weatherContainer.appendChild(div);
-    // }
-
-
 };
 
-// // function for 5 day forcast
-// var display5Day = function () {
-
-
-// }
 
 // $('#city-search').ready(getCityData);
 
+// clears out any current values on the page
 $("#submit").on("click", function () {
     $("#cityName").empty();
     $("#currentForecast").empty();
