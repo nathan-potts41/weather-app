@@ -15,6 +15,7 @@ var getCity = function (event) {
     var city = $.trim(cityEntry.val());
 
     getCityData(city);
+    displayForecast(city);
 };
 
 // function fetching the json data for above city
@@ -24,9 +25,9 @@ var getCityData = function (city) {
             if (response.ok) {
                 response.json()
                     .then(function (data) {
-                        console.log(data);
+                        // console.log(data);
 
-                        // dynamically generated htmlloaded into page
+                        // dynamically generated html loaded into page
                         var weatherContainer = document.getElementById("currentForecast");
                         var cityTitle = document.getElementById("cityName");
 
@@ -58,12 +59,13 @@ var getCityData = function (city) {
                         var lat = data.city.coord.lat;
                         var lon = data.city.coord.lon;
 
+                        // dynamically generating the uv index
                         fetch(uvUrl + lat + lonData + lon + uvKey)
                             .then(function (uvresponse) {
                                 if (uvresponse.ok) {
                                     uvresponse.json()
                                         .then(function (uvdata) {
-                                            console.log(uvdata);
+                                            // console.log(uvdata);
 
                                             var uvIndex = document.createElement("p")
                                             uvIndex.innerHTML = 'UV Index: ' + uvdata.value;
@@ -78,22 +80,57 @@ var getCityData = function (city) {
             }
 
         });
-
 };
 
 // function for weekly forecast
-var displayForecast = function () {
+var displayForecast = function (city) {
+    fetch(weatherUrl + city + apiKey)
+        .then(function (response) {
+            if (response.ok) {
+                response.json()
+                    .then(function (data) {
+                        console.log(data);
 
+                        //html loaded into 5 day forecast
+                        for (i = 0; i < 5; i++) {
+                            var weeklyForecast = document.querySelector(".card-deck");
+                            var dailyWeather = document.createElement("div")
+                            dailyWeather.className = "card bg-primary mb-3";
 
+                            var date = document.createElement("p");
+                            date.innerHTML = moment().format("(MM / D / YYYY)");
+
+                            var icon = document.createElement("img")
+                            icon.src = "http://openweathermap.org/img/wn/" + data.list[i].weather[0].icon + ".png";
+
+                            var temperature = document.createElement("p");
+                            temperature.innerHTML = "Temp: " + data.list[i].main.temp + " ˚F";
+
+                            var humidity = document.createElement("p");
+                            humidity.innerHTML = "Humidity: " + data.list[i].main.humidity + " %";
+
+                            dailyWeather.appendChild(date);
+                            dailyWeather.appendChild(icon);
+                            dailyWeather.appendChild(temperature);
+                            dailyWeather.appendChild(humidity);
+                            weeklyForecast.appendChild(dailyWeather);
+                        }
+                    })
+            }
+        })
 };
 
 
-// $('#city-search').ready(getCityData);
+// var myStorage = function () {
+
+// }
+
 
 // clears out any current values on the page
 $("#submit").on("click", function () {
     $("#cityName").empty();
     $("#currentForecast").empty();
+    $(".card-deck").empty();
 });
 $("#submit").on("click", getCity);
 
