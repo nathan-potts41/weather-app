@@ -15,38 +15,41 @@ var getCity = function (event) {
 
 // function fetching the json data for above city
 var getCityData = function (city) {
-
     fetch(weatherUrl + city + apiKey)
         .then(function (response) {
-            response.json()
-                .then(function (data) {
-                    console.log(data.list);
-                    var weatherContainer = document.getElementById("currentForecast");
-                    var cityTitle = document.getElementById("cityName");
+            if (response.ok) {
+                response.json()
+                    .then(function (data) {
+                        console.log(data);
+                        var weatherContainer = document.getElementById("currentForecast");
+                        var cityTitle = document.getElementById("cityName");
 
-                    var title = document.createElement("h2")
-                    title.innerHTML = $("#city-search").val() + " " + moment().format("(MM / D / YYYY)");
+                        var title = document.createElement("h2")
+                        title.innerHTML = $("#city-search").val() + " " + moment().format("(MM / D / YYYY)");
 
-                    var temp = document.createElement("p")
-                    temp.innerHTML = 'Temperature: ' + data.list[0].main.temp;
+                        var temp = document.createElement("p")
+                        temp.innerHTML = 'Temperature: ' + data.list[0].main.temp;
 
-                    var humidity = document.createElement("p")
-                    humidity.innerHTML = 'Humidity: ' + data.list[0].main.humidity;
+                        var humidity = document.createElement("p")
+                        humidity.innerHTML = 'Humidity: ' + data.list[0].main.humidity;
 
-                    var windSpeed = document.createElement("p")
-                    windSpeed.innerHTML = 'Wind Speed: ' + data.list[0].wind.speed;
+                        var windSpeed = document.createElement("p")
+                        windSpeed.innerHTML = 'Wind Speed: ' + data.list[0].wind.speed;
 
-                    var feelsLike = document.createElement("p")
-                    feelsLike.innerHTML = 'Feels Like: ' + data.list[0].main.feels_like;
+                        var feelsLike = document.createElement("p")
+                        feelsLike.innerHTML = 'Feels Like: ' + data.list[0].main.feels_like;
 
-                    cityTitle.appendChild(title);
-                    weatherContainer.appendChild(temp);
-                    weatherContainer.appendChild(humidity);
-                    weatherContainer.appendChild(windSpeed);
-                    weatherContainer.appendChild(feelsLike);
-                });
+                        cityTitle.appendChild(title);
+                        weatherContainer.appendChild(temp);
+                        weatherContainer.appendChild(humidity);
+                        weatherContainer.appendChild(windSpeed);
+                        weatherContainer.appendChild(feelsLike);
+                    });
+            } else {
+                alert('Your search did not work, please make sure you entered the city correctly.');
+            }
+
         });
-
 };
 
 // function for current day forecast
@@ -74,6 +77,12 @@ var displayForecast = function () {
 // }
 
 // $('#city-search').ready(getCityData);
-document.getElementById("submit").addEventListener("click", getCity);
+
+$("#submit").on("click", function () {
+    $("#cityName").empty();
+    $("#currentForecast").empty();
+});
+$("#submit").on("click", getCity);
+
 
 
