@@ -26,7 +26,6 @@ Stack Overflow, The Internet, Jake Nystrom
 None currently on the horizon
 
 ## ScreenShots
-!(assets/Screen Shot 2020-12-04 at 12.29.45 PM.png)
+!(/assets/screenshot.png)
 
-![GitHub Logo](/images/logo.png)
-Format: ![Alt Text](url)
+
