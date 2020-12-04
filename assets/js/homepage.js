@@ -4,7 +4,7 @@ var oneCallUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=";
 var apiKey = "&units=imperial&appid=a41a732753ea4b9aa10d848013b989de";
 
 // inputted city uv index api
-var uvUrl = "http://api.openweathermap.org/data/2.5/uvi?lat=";
+var uvUrl = "https://api.openweathermap.org/data/2.5/uvi?lat=";
 var lonParam = "&lon=";
 var uvKey = "&appid=a41a732753ea4b9aa10d848013b989de";
 
