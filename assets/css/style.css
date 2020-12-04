@@ -24,24 +24,28 @@
 
 .mild {
     background-color: rgb(2, 177, 2);
-    width: 15%;
+    display: inline-block;
+    max-width: auto;
     border-radius: 5px;
 }
 
 .moderate {
     background-color: yellow;
-    width: 15%;
+    display: inline-block;
+    max-width: auto;
     border-radius: 5px;
 }
 
 .high {
     background-color: orange;
-    width: 15%;
+    display: inline-block;
+    max-width: auto;
     border-radius: 5px;
 }
 
 .severe {
     background-color: red;
-    width: 15%;
+    display: inline-block;
+    max-width: auto;
     border-radius: 5px;
 }
