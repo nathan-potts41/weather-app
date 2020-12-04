@@ -54,7 +54,7 @@ var getCityData = function (city) {
                         title.innerHTML = cityName + " " + moment().format("(MM/D/YYYY)");
 
                         var icon = document.createElement("img")
-                        icon.src = "http://openweathermap.org/img/wn/" + data.list[0].weather[0].icon + ".png";
+                        icon.src = "https://openweathermap.org/img/wn/" + data.list[0].weather[0].icon + ".png";
 
                         var temp = document.createElement("p")
                         temp.innerHTML = 'Temperature: ' + data.list[0].main.temp + " ˚F";
@@ -142,7 +142,7 @@ var displayForecast = function (lat, lon) {
                                 .format("MM/D/YYYY");
 
                             var icon = document.createElement("img")
-                            icon.src = "http://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + ".png";
+                            icon.src = "https://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + ".png";
 
                             var temperature = document.createElement("p");
                             temperature.innerHTML = "Temp: " + data.daily[i].temp.day + " ˚F";
