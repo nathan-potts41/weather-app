@@ -1,17 +1,23 @@
-body {
-    margin: 0px;
-}
-
 .header {
-    background-color: midnightblue;
+    background-color: #343a40;
     color: white;
     display: flex;
     font-size: 25px;
     padding: 10px;
     justify-content: center;
-    
 }
 
 .city-search {
-    background-color:rgba(128, 128, 128, .1);
+    background-color: rgba(128, 128, 128, .1);
+}
+
+.day {
+    padding: 10px;
+    color: white;
+    line-height: 15px;
+    font-size: 13px;
+}
+
+#jumbo {
+    margin-top: 10px;
 }
