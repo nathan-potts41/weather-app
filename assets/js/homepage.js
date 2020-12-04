@@ -91,6 +91,16 @@ var getCityData = function (city) {
                                         .then(function (uvdata) {
 
                                             var uvIndex = document.createElement("p")
+
+                                            if (uvdata.value < 2) {
+                                                uvIndex.classList.add("mild");
+                                            } else if (uvdata.value > 2 && uvdata.value <= 4) {
+                                                uvIndex.classList.add("moderate");
+                                            } else if (uvdata.value >= 4 && uvdata.value < 7) {
+                                                uvIndex.classList.add("high");
+                                            } else if (uvdata.value >= 7) {
+                                                uvIndex.classList.add("severe");
+                                            };
                                             uvIndex.innerHTML = 'UV Index: ' + uvdata.value;
 
                                             weatherContainer.appendChild(uvIndex);
